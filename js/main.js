@@ -58,7 +58,7 @@
           });
         })
         .then(function (result) {
-          if (result.ok && result.body && result.body.success !== false) {
+          if (result.body && result.body.success) {
             statusEl.textContent = "Thanks — your message was sent to info@amfitech.in.";
             statusEl.className = "form-status success";
             form.reset();

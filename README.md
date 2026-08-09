@@ -2,15 +2,13 @@
 
 Static HTML/CSS/JS site for GitHub Pages.
 
-## Contact form (free, delivers to email)
+## Contact form (Web3Forms)
 
-Inquiries go to **info@amfitech.in** via [FormSubmit](https://formsubmit.co) — no account required.
+Inquiries go to **info@amfitech.in** via [Web3Forms](https://web3forms.com).
 
-1. Submit the form once from the live site.
-2. Open **info@amfitech.in** and click the FormSubmit confirmation link (one-time).
-3. After that, messages arrive in that inbox.
-
-If you prefer another free option later: [Web3Forms](https://web3forms.com) (API key) or [Formspree](https://formspree.io).
+1. In Web3Forms → **Settings**, confirm the destination email is `info@amfitech.in`.
+2. Send a test message from the live Contact form.
+3. Check **info@amfitech.in** (and spam) plus Web3Forms → **Submissions**.
 
 ## Host on GitHub Pages
 
