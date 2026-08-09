@@ -43,36 +43,32 @@
   var statusEl = document.getElementById("form-status");
   if (form && statusEl) {
     form.addEventListener("submit", function (e) {
-      var action = form.getAttribute("action") || "";
-      if (action.indexOf("YOUR_FORM_ID") !== -1) {
-        e.preventDefault();
-        statusEl.textContent =
-          "Set your Formspree form ID in index.html (replace YOUR_FORM_ID), or use mailto until then.";
-        statusEl.className = "form-status error";
-        return;
-      }
       e.preventDefault();
       statusEl.textContent = "Sending…";
       statusEl.className = "form-status";
       var data = new FormData(form);
-      fetch(action, {
+      fetch(form.action, {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
       })
         .then(function (res) {
-          if (res.ok) {
-            statusEl.textContent = "Thanks — your message was sent.";
+          return res.json().then(function (body) {
+            return { ok: res.ok, body: body };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.body && result.body.success !== false) {
+            statusEl.textContent = "Thanks — your message was sent to info@amfitech.in.";
             statusEl.className = "form-status success";
             form.reset();
           } else {
-            return res.json().then(function (body) {
-              throw new Error(body.error || "Send failed");
-            });
+            throw new Error((result.body && result.body.message) || "Send failed");
           }
         })
         .catch(function () {
-          statusEl.textContent = "Something went wrong. Try email or LinkedIn instead.";
+          statusEl.innerHTML =
+            'Could not send just now. Email <a href="mailto:info@amfitech.in">info@amfitech.in</a> directly.';
           statusEl.className = "form-status error";
         });
     });
